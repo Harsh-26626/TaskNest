@@ -3,11 +3,11 @@ import { Search, Plus, User } from "lucide-react";
 
 export default function Header({ search, onSearch, onNew }) {
   return (
-    <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl h-16 border-b border-outline-variant/20">
+    <header className="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-xl h-16 border-b border-outline-variant/20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
         {/* Left */}
         <div className="flex items-center gap-3">
-          <span className="text-xl font-semibold text-primary tracking-tight">TaskNest</span>
+          <span className="text-xl font-bold text-primary tracking-tight">TaskNest</span>
         </div>
 
         {/* Right */}

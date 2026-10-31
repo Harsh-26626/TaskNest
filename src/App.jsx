@@ -50,7 +50,8 @@ export default function App() {
         onNew={handleNew}
       />
 
-      <main className="max-w-7xl mx-auto pt-24 p-6 lg:p-12 flex flex-col gap-8">
+      {/* Main container with clean top padding to prevent header overlap */}
+      <main className="max-w-7xl mx-auto pt-28 px-6 pb-16 lg:pt-32 lg:px-12 flex flex-col gap-8">
         {/* Title row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>

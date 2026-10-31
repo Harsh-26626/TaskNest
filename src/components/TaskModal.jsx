@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { X } from "lucide-react";
+import { X, User } from "lucide-react";
 import { addTask, updateTask } from "../store/tasksSlice";
 import { COLUMNS, PRIORITIES } from "../utils/constants";
 
@@ -10,6 +10,7 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
 
   const [form, setForm] = useState({
     title: "",
+    author: "Harsh Ahuja",
     description: "",
     priority: "Medium",
     status: "todo",
@@ -23,6 +24,7 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
       if (task) {
         setForm({
           title: task.title || "",
+          author: task.author || "Harsh Ahuja",
           description: task.description || "",
           priority: task.priority || "Medium",
           status: task.status || "todo",
@@ -32,6 +34,7 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
       } else {
         setForm({
           title: "",
+          author: "Harsh Ahuja",
           description: "",
           priority: "Medium",
           status: defaultStatus || "todo",
@@ -66,6 +69,7 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
     const payload = {
       ...form,
       title: trimmedTitle,
+      author: form.author.trim() || "Harsh Ahuja",
       tag: form.tag.trim() || "General",
     };
 
@@ -111,12 +115,29 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
                 setForm({ ...form, title: e.target.value });
                 if (titleError) setTitleError("");
               }}
-              placeholder="e.g. Design user profile page"
+              placeholder="e.g. Design problem fetching api for admin"
               className={`${inputStyle} ${titleError ? "border-rose-500 focus:ring-rose-500" : ""}`}
             />
             {titleError && (
               <p className="text-rose-400 text-xs mt-1 font-medium">{titleError}</p>
             )}
+          </div>
+
+          {/* Author Name */}
+          <div>
+            <label className="block text-xs font-medium text-on-surface-variant mb-1.5">
+              Author Name <span className="text-rose-400">*</span>
+            </label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
+              <input
+                type="text"
+                value={form.author}
+                onChange={(e) => setForm({ ...form, author: e.target.value })}
+                placeholder="e.g. Harsh Ahuja"
+                className={`${inputStyle} pl-9`}
+              />
+            </div>
           </div>
 
           {/* Description */}
@@ -125,7 +146,7 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
               Description
             </label>
             <textarea
-              rows={3}
+              rows={2}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               placeholder="Provide a brief summary of the task..."
@@ -174,13 +195,13 @@ export default function TaskModal({ open, task, defaultStatus, onClose }) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-medium text-on-surface-variant mb-1.5">
-                Tag
+                Tag (e.g. Backend, Frontend, Admin)
               </label>
               <input
                 type="text"
                 value={form.tag}
                 onChange={(e) => setForm({ ...form, tag: e.target.value })}
-                placeholder="General"
+                placeholder="Backend, Admin"
                 className={inputStyle}
               />
             </div>
